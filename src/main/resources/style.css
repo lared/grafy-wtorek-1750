@@ -1,8 +1,16 @@
 node {
-    size: 3px;
-    fill-color: #777;
-    text-mode: hidden;
+    size: 20px;
+    text-size: 20px;
+    fill-color: #4c993f;
     z-index: 0;
+}
+
+node.I{
+    fill-color: #ca9915;
+}
+
+node.i{
+    fill-color: #991817;
 }
 
 edge {

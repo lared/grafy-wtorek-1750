@@ -5,6 +5,7 @@ import edu.agh.gg.grammar.P1;
 import edu.agh.gg.grammar.P2;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
+import org.graphstream.stream.file.FileSinkImages;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceDGS;
 
@@ -21,38 +22,38 @@ public class Visualizer {
 
         StyleSheet styleSheet = new StyleSheet();
         styleSheet.setBase(Visualizer.class.getResource("/style.css"));
-        graph.addAttribute("ui.stylesheet", "url('file:///home/piotrek/Documents/grafy-wtorek-1750/src/main/resources/style.css')");
+        graph.addAttribute("ui.stylesheet", "url('src//main//resources//style.css')");
 
-
+        FileSinkImages pic = new FileSinkImages(FileSinkImages.OutputType.PNG, FileSinkImages.Resolutions.VGA);
+        pic.setLayoutPolicy(FileSinkImages.LayoutPolicy.COMPUTED_FULLY_AT_NEW_IMAGE);
 
         FileSource fs = new FileSourceDGS();
-
         fs.addSink(graph);
 
         P0 p0 = new P0();
         P1 p1 = new P1();
-        P2 p2 = new P2();
+//        P2 p2 = new P2(); //not working for now
 
         Vertex vertex = Vertex.withoutParent(VertexLabel.I);
         p0.apply(vertex);
         p1.apply(vertex);
-        p2.apply(vertex);
+//        p2.apply(vertex);
 
         try {
 //            fs.readAll("src/main/resources/po.dgs");
             String string = withMagicHeader(nodesFirst(split(vertex.serialize())));
             fs.readAll(toInputStream(string));
             graph.display();
+            pic.writeAll(graph, "graph.png");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             fs.removeSink(graph);
         }
-
     }
 
     private static String withMagicHeader(String string) {
-        return String.format("DGS004\ntriangle 0 6\n%s", string);
+        return String.format("DGS004\ntriangle 0 0\n%s", string);
     }
 
     private static InputStream toInputStream(String string) {

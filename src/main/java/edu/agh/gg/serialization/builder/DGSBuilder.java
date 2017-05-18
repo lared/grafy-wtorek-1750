@@ -12,6 +12,7 @@ public class DGSBuilder implements Builder{
     private static final String NODE_DGS_PREFIX = "an";
     private static final String EDGE_DGS_PREFIX = "ae";
     private static final String ATTRIBUTE_LABEL = "label:";
+    private static final String ATTRIBUTE_CLASS = "ui.class:";
     private static final String ATTRIBUTE_EDGE_DIRECTION = "EdgeDirection=";
     private static final String NEW_LINE = "\n";
     private static final String SPACE = " ";
@@ -26,7 +27,8 @@ public class DGSBuilder implements Builder{
 
     @Override
     public void appendNode(VertexLabel label) {
-        append(NODE_DGS_PREFIX + SPACE + nodeUniqueID + SPACE + ATTRIBUTE_LABEL +label.serialize()+ NEW_LINE);
+        append(NODE_DGS_PREFIX + SPACE + nodeUniqueID + SPACE + ATTRIBUTE_LABEL + label.serialize()
+                + SPACE + ATTRIBUTE_CLASS + label.serialize() + NEW_LINE);
     }
 
     @Override
