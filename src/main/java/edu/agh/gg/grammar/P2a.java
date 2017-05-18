@@ -14,7 +14,7 @@ public class P2a implements Production {
         Vertex rightOrangeI = vertex.getChild(SW);
 
         Vertex leftTopGrayI = leftOrangeI.getChild(NE);
-        Vertex leftBottomGrayI = leftOrangeI.getChild(SW); //TODO: shouldn't be SE?
+        Vertex leftBottomGrayI = leftOrangeI.getChild(SE);
         Vertex rightTopGrayI = rightOrangeI.getChild(NW);
         Vertex rightBottomGrayI = rightOrangeI.getChild(SW);
 
@@ -61,7 +61,7 @@ public class P2a implements Production {
     @Override
     public void apply(Vertex vertex) {
         Vertex leftTopGrayI = vertex.getChild(NE).getChild(NE);
-        Vertex leftBottomGrayI = vertex.getChild(NE).getChild(SW);
+        Vertex leftBottomGrayI = vertex.getChild(NE).getChild(SE);
 
         Vertex topE = leftTopGrayI.getSibling(NE);
 

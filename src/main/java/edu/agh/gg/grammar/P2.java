@@ -12,7 +12,7 @@ public class P2 implements Production {
         Vertex leftOrangeI = vertex.getChild(NE);
         Vertex rightOrangeI = vertex.getChild(SW);
         Vertex leftTopGrayI = leftOrangeI.getChild(NE);
-        Vertex leftBottomGrayI = leftOrangeI.getChild(SW);
+        Vertex leftBottomGrayI = leftOrangeI.getChild(SE);
         Vertex rightTopGrayI = rightOrangeI.getChild(NW);
         Vertex rightBottomGrayI = rightOrangeI.getChild(SW);
         Vertex leftTopE = leftTopGrayI.getSibling(NE);
@@ -56,7 +56,7 @@ public class P2 implements Production {
     @Override
     public void apply(Vertex vertex) {
         Vertex leftTopGrayI = vertex.getChild(NE).getChild(NE);
-        Vertex leftBottomGrayI = vertex.getChild(NE).getChild(SW);
+        Vertex leftBottomGrayI = vertex.getChild(NE).getChild(SE);
         Vertex leftTopE = leftTopGrayI.getSibling(NE);
         Vertex leftMiddleE = leftTopGrayI.getSibling(SE);
         Vertex leftBottomE = leftBottomGrayI.getSibling(SE);

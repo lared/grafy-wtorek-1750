@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 
 public class P2Test {
 
-    public Vertex prepareInitialGraph() {
+    private Vertex prepareInitialGraph() {
         Vertex greenE = Vertex.withoutParent(VertexLabel.E);
 
         Vertex leftOrange = greenE.createChild(NE);
@@ -24,7 +24,7 @@ public class P2Test {
         rightOrange.setLabel(VertexLabel.I);
 
         Vertex leftTopI = leftOrange.createChild(NE);
-        Vertex leftBottomI = leftOrange.createChild(SW);
+        Vertex leftBottomI = leftOrange.createChild(SE);
         Vertex rightTopI = rightOrange.createChild(NW);
         Vertex rightBottomI = rightOrange.createChild(SW);
 
@@ -69,7 +69,7 @@ public class P2Test {
         Vertex leftOrange = rootVertex.getChild(NE);
         Vertex rightOrange = rootVertex.getChild(SW);
         Vertex leftTopI = leftOrange.getChild(NE);
-        Vertex leftBottomI = leftOrange.getChild(SW);
+        Vertex leftBottomI = leftOrange.getChild(SE);
         Vertex rightTopI = rightOrange.getChild(NW);
         Vertex rightBottomI = rightOrange.getChild(SW);
         Vertex topE = leftTopI.getSibling(NE);
@@ -96,7 +96,7 @@ public class P2Test {
         Vertex leftOrange = rootVertex.getChild(NE);
         Vertex rightOrange = rootVertex.getChild(SW);
         Vertex leftTopI = leftOrange.getChild(NE);
-        Vertex leftBottomI = leftOrange.getChild(SW);
+        Vertex leftBottomI = leftOrange.getChild(SE);
         Vertex rightTopI = rightOrange.getChild(NW);
         Vertex rightBottomI = rightOrange.getChild(SW);
         Vertex topE = leftTopI.getSibling(NE);
@@ -148,7 +148,7 @@ public class P2Test {
         Vertex leftOrange = rootVertex.getChild(NE);
         Vertex rightOrange = rootVertex.getChild(SW);
         Vertex leftTopI = leftOrange.getChild(NE);
-        Vertex leftBottomI = leftOrange.getChild(SW);
+        Vertex leftBottomI = leftOrange.getChild(SE);
         Vertex rightTopI = rightOrange.getChild(NW);
         Vertex rightBottomI = rightOrange.getChild(SW);
         Vertex topE = leftTopI.getSibling(NE);

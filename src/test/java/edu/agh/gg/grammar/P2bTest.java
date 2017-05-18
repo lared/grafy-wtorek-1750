@@ -21,7 +21,7 @@ public class P2bTest {
         rightOrange.setLabel(VertexLabel.I);
 
         Vertex leftTopI = leftOrange.createChild(NE);
-        Vertex leftBottomI = leftOrange.createChild(SW);
+        Vertex leftBottomI = leftOrange.createChild(SE);
         Vertex rightTopI = rightOrange.createChild(NW);
         Vertex rightBottomI = rightOrange.createChild(SW);
 
@@ -69,7 +69,7 @@ public class P2bTest {
         Vertex leftOrange = rootVertex.getChild(NE);
         Vertex rightOrange = rootVertex.getChild(SW);
         Vertex leftTopI = leftOrange.getChild(NE);
-        Vertex leftBottomI = leftOrange.getChild(SW);
+        Vertex leftBottomI = leftOrange.getChild(SE);
         Vertex rightTopI = rightOrange.getChild(NW);
         Vertex rightBottomI = rightOrange.getChild(SW);
         Vertex topE = leftTopI.getSibling(NE);
@@ -96,7 +96,7 @@ public class P2bTest {
         Vertex leftOrange = rootVertex.getChild(NE);
         Vertex rightOrange = rootVertex.getChild(SW);
         Vertex leftTopI = leftOrange.getChild(NE);
-        Vertex leftBottomI = leftOrange.getChild(SW);
+        Vertex leftBottomI = leftOrange.getChild(SE);
         Vertex rightTopI = rightOrange.getChild(NW);
         Vertex rightBottomI = rightOrange.getChild(SW);
         Vertex topE = leftTopI.getSibling(NE);
@@ -148,7 +148,7 @@ public class P2bTest {
         Vertex leftOrange = rootVertex.getChild(NE);
         Vertex rightOrange = rootVertex.getChild(SW);
         Vertex leftTopI = leftOrange.getChild(NE);
-        Vertex leftBottomI = leftOrange.getChild(SW);
+        Vertex leftBottomI = leftOrange.getChild(SE);
         Vertex rightTopI = rightOrange.getChild(NW);
         Vertex rightBottomI = rightOrange.getChild(SW);
         Vertex topE = leftTopI.getSibling(NE);
