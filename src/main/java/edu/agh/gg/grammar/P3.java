@@ -7,7 +7,9 @@ import static edu.agh.gg.EdgeDirection.*;
 import static edu.agh.gg.VertexLabel.E;
 import static edu.agh.gg.VertexLabel.I;
 
+
 public class P3 implements Production {
+
     @Override
     public boolean applicableTo(Vertex vertex) {
         Vertex topOrangeI = vertex.getChild(NW);

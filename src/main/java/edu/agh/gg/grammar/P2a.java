@@ -6,78 +6,84 @@ import static edu.agh.gg.EdgeDirection.*;
 import static edu.agh.gg.VertexLabel.E;
 import static edu.agh.gg.VertexLabel.I;
 
-public class P2 implements Production {
+public class P2a implements Production {
+
     @Override
     public boolean applicableTo(Vertex vertex) {
         Vertex leftOrangeI = vertex.getChild(NE);
         Vertex rightOrangeI = vertex.getChild(SW);
+
         Vertex leftTopGrayI = leftOrangeI.getChild(NE);
         Vertex leftBottomGrayI = leftOrangeI.getChild(SE);
         Vertex rightTopGrayI = rightOrangeI.getChild(NW);
         Vertex rightBottomGrayI = rightOrangeI.getChild(SW);
-        Vertex leftTopE = leftTopGrayI.getSibling(NE);
+
+        Vertex topE = leftTopGrayI.getSibling(NE);
+
         Vertex leftMiddleE = leftTopGrayI.getSibling(SE);
         Vertex leftBottomE = leftBottomGrayI.getSibling(SE);
-        Vertex rightTopE = rightTopGrayI.getSibling(NW);
-        Vertex rightMiddleE = rightTopGrayI.getSibling(SW);
+//        Vertex rightTopE = rightTopGrayI.getSibling(NW); // == leftTopE A
+        Vertex rightMiddleE = rightTopGrayI.getSibling(SW); // == leftMiddleE
         Vertex rightBottomE = rightBottomGrayI.getSibling(SW);
+
         return vertex.getLabel().equals(E)
                 && leftOrangeI.getLabel().equals(I)
                 && rightOrangeI.getLabel().equals(I)
                 && vertex.getChildrenEdges().size() == 2
+                && leftOrangeI.getChildrenEdges().size() == 2
+                && rightOrangeI.getChildrenEdges().size() == 2 //orange done
+
                 && leftTopGrayI.getLabel().equals(I)
                 && leftBottomGrayI.getLabel().equals(I)
-                && leftOrangeI.getChildrenEdges().size() == 2
-                && leftTopE.getLabel().equals(E)
-                && leftMiddleE.getLabel().equals(E)
-                && leftTopGrayI.getSiblingsEdges().size() == 2
-                && leftBottomGrayI.getSibling(NE) == leftMiddleE
-                && leftBottomE.getLabel().equals(E)
-                && leftBottomGrayI.getSiblingsEdges().size() == 2 //done left
+
                 && rightTopGrayI.getLabel().equals(I)
                 && rightBottomGrayI.getLabel().equals(I)
-                && rightOrangeI.getChildrenEdges().size() == 2
-                && rightTopE.getLabel().equals(E)
+
+                && topE.getLabel().equals(E)
+                && topE.equals(rightTopGrayI.getSibling(NW))
+
+                && leftMiddleE.getLabel().equals(E)
+                && leftMiddleE.equals(leftBottomGrayI.getSibling(NE))
+                && leftBottomE.getLabel().equals(E)//left done
                 && rightMiddleE.getLabel().equals(E)
-                && rightTopGrayI.getSiblingsEdges().size() == 2
-                && rightBottomGrayI.getSibling(NW) == rightMiddleE
-                && rightBottomE.getLabel().equals(E)
-                && rightBottomGrayI.getSiblingsEdges().size() == 2 //done right
-                && leftTopE.getSibling(S) == leftMiddleE
-                && leftMiddleE.getSibling(N) == leftTopE
+                && rightMiddleE.equals(rightBottomGrayI.getSibling(NW))
+                && rightBottomE.getLabel().equals(E)//right done
+
+                && topE.getSibling(NW) == leftMiddleE
+
                 && leftMiddleE.getSibling(S) == leftBottomE
-                && leftBottomE.getSibling(N) == leftMiddleE
-                && rightTopE.getSibling(S) == rightMiddleE
-                && rightMiddleE.getSibling(N) == rightTopE
-                && rightMiddleE.getSibling(S) == rightBottomE
-                && rightBottomE.getSibling(N) == rightMiddleE;
+
+                && topE.getSibling(NE) == rightMiddleE
+
+                && rightMiddleE.getSibling(S) == rightBottomE;
     }
 
     @Override
     public void apply(Vertex vertex) {
         Vertex leftTopGrayI = vertex.getChild(NE).getChild(NE);
         Vertex leftBottomGrayI = vertex.getChild(NE).getChild(SE);
-        Vertex leftTopE = leftTopGrayI.getSibling(NE);
+
+        Vertex topE = leftTopGrayI.getSibling(NE);
+
         Vertex leftMiddleE = leftTopGrayI.getSibling(SE);
         Vertex leftBottomE = leftBottomGrayI.getSibling(SE);
 
-        leftTopGrayI.getSiblingsEdges().remove(NE, leftTopE);
         leftTopGrayI.getSiblingsEdges().remove(SE, leftMiddleE);
         leftBottomGrayI.getSiblingsEdges().remove(NE, leftMiddleE);
         leftBottomGrayI.getSiblingsEdges().remove(SE, leftBottomE);
 
-        leftTopE.getSiblingsEdges().remove(S, leftMiddleE);
-        leftMiddleE.getSiblingsEdges().remove(N, leftTopE);
+        topE.getSiblingsEdges().remove(NW, leftMiddleE);
         leftMiddleE.getSiblingsEdges().remove(S, leftBottomE);
-        leftBottomE.getSiblingsEdges().remove(N, leftMiddleE);
 
-        Vertex rightTopE = vertex.getChild(SW).getChild(NW).getSibling(NW);
         Vertex rightMiddleE = vertex.getChild(SW).getChild(NW).getSibling(SW);
         Vertex rightBottomE = vertex.getChild(SW).getChild(SW).getSibling(SW);
 
-        leftTopGrayI.connectToSibling(NE, rightTopE);
+        topE.getSiblingsEdges().remove(NE, rightMiddleE);
+        topE.connectToSibling(S, rightMiddleE);
+
         leftTopGrayI.connectToSibling(SE, rightMiddleE);
         leftBottomGrayI.connectToSibling(NE, rightMiddleE);
         leftBottomGrayI.connectToSibling(SE, rightBottomE);
     }
 }
+
