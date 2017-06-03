@@ -1,9 +1,13 @@
 package edu.agh.gg;
 
+import edu.agh.gg.serialization.*;
+import edu.agh.gg.serialization.idgenerator.Id;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public class Vertex {
+public class Vertex implements Serializable {
+    private final String uniqueID;
     private final Vertex parent;
     private final EdgeDirection parentDirection;
     private final ConcurrentMap<EdgeDirection, Vertex> childrenEdges = new ConcurrentHashMap<>();
@@ -12,6 +16,7 @@ public class Vertex {
     private VertexLabel label;
 
     private Vertex(Vertex parent, EdgeDirection parentDirection, VertexLabel label) {
+        this.uniqueID = Id.getNodeID();
         this.parent = parent;
         this.parentDirection = parentDirection;
         this.label = label;
@@ -74,6 +79,15 @@ public class Vertex {
 
     public ConcurrentMap<EdgeDirection, Vertex> getSiblingsEdges() {
         return siblingsEdges;
+    }
+
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
+    @Override
+    public String serialize() {
+        return new Serializer(this).serialize();
     }
 
 }
