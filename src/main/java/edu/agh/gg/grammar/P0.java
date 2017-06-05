@@ -3,7 +3,6 @@ package edu.agh.gg.grammar;
 import edu.agh.gg.EdgeDirection;
 import edu.agh.gg.Vertex;
 import edu.agh.gg.VertexLabel;
-import javafx.scene.input.ScrollEvent;
 
 public class P0 implements Production {
     @Override

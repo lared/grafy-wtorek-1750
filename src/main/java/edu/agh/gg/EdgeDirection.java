@@ -1,6 +1,8 @@
 package edu.agh.gg;
 
-public enum EdgeDirection {
+import edu.agh.gg.serialization.Serializable;
+
+public enum EdgeDirection implements Serializable {
     N(1),
     NE(2),
     E(3),
@@ -23,5 +25,10 @@ public enum EdgeDirection {
             }
         }
         throw new AssertionError("All directions should have opposite directions");
+    }
+
+    @Override
+    public String serialize(){
+        return this.name();
     }
 }

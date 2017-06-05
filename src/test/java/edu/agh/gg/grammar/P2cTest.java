@@ -8,12 +8,9 @@ import org.junit.Test;
 import java.util.concurrent.ConcurrentMap;
 
 import static edu.agh.gg.EdgeDirection.*;
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-public class P2Test {
+public class P2cTest {
 
     private Vertex prepareInitialGraph() {
         Vertex greenE = Vertex.withoutParent(VertexLabel.E);
@@ -28,43 +25,47 @@ public class P2Test {
         Vertex rightTopI = rightOrange.createChild(NW);
         Vertex rightBottomI = rightOrange.createChild(SW);
 
+        leftTopI.setLabel(VertexLabel.I);
+        leftBottomI.setLabel(VertexLabel.I);
+        rightTopI.setLabel(VertexLabel.I);
+        rightBottomI.setLabel(VertexLabel.I);
+
         Vertex leftTopE = Vertex.withoutParent(VertexLabel.E);
         Vertex leftMiddleE = Vertex.withoutParent(VertexLabel.E);
-        Vertex leftBottomE = Vertex.withoutParent(VertexLabel.E);
         Vertex rightTopE = Vertex.withoutParent(VertexLabel.E);
         Vertex rightMiddleE = Vertex.withoutParent(VertexLabel.E);
-        Vertex rightBottomE = Vertex.withoutParent(VertexLabel.E);
+        Vertex bottomE = Vertex.withoutParent(VertexLabel.E);
 
         leftTopI.connectToSibling(NE, leftTopE);
         leftTopI.connectToSibling(SE, leftMiddleE);
         leftBottomI.connectToSibling(NE, leftMiddleE);
-        leftBottomI.connectToSibling(SE, leftBottomE);
+        leftBottomI.connectToSibling(SE, bottomE);
         leftTopE.connectToSibling(S, leftMiddleE);
-        leftMiddleE.connectToSibling(S, leftBottomE);
+        leftMiddleE.connectToSibling(NE, bottomE);
 
         rightTopI.connectToSibling(NW, rightTopE);
         rightTopI.connectToSibling(SW, rightMiddleE);
         rightBottomI.connectToSibling(NW, rightMiddleE);
-        rightBottomI.connectToSibling(SW, rightBottomE);
+        rightBottomI.connectToSibling(SW, bottomE);
         rightTopE.connectToSibling(S, rightMiddleE);
-        rightMiddleE.connectToSibling(S, rightBottomE);
+        rightMiddleE.connectToSibling(NW, bottomE);
 
         return greenE;
     }
 
     @Test
     public void shouldBeApplicableTo() throws Exception {
-        Production p2 = new P2();
-        Vertex rootVertex = prepareInitialGraph();
+        Production p2c = new P2c();
+        Vertex rootVertex = this.prepareInitialGraph();
 
-        assertTrue(p2.applicableTo(rootVertex));
+        assertTrue(p2c.applicableTo(rootVertex));
     }
 
     @Test
     public void shouldHaveCorrectLabels() throws Exception {
-        Production p2 = new P2();
+        Production p2c = new P2c();
         Vertex rootVertex = prepareInitialGraph();
-        p2.apply(rootVertex);
+        p2c.apply(rootVertex);
 
         Vertex leftOrange = rootVertex.getChild(NE);
         Vertex rightOrange = rootVertex.getChild(SW);
@@ -89,9 +90,9 @@ public class P2Test {
 
     @Test
     public void shouldHaveCorrectSiblingsDirections() throws Exception {
-        Production p2 = new P2();
+        Production p2c = new P2c();
         Vertex rootVertex = prepareInitialGraph();
-        p2.apply(rootVertex);
+        p2c.apply(rootVertex);
 
         Vertex leftOrange = rootVertex.getChild(NE);
         Vertex rightOrange = rootVertex.getChild(SW);
@@ -114,7 +115,7 @@ public class P2Test {
         assertNotNull(leftTopSiblings.get(EdgeDirection.NE));
         assertNotNull(leftTopSiblings.get(EdgeDirection.SE));
 
-        assertNotNull(leftBottomSiblings.get(EdgeDirection.SE));
+        assertNotNull(leftBottomSiblings.get(EdgeDirection.NE));
         assertNotNull(leftBottomSiblings.get(EdgeDirection.SE));
 
         assertNotNull(rightTopSiblings.get(EdgeDirection.NW));
@@ -123,13 +124,9 @@ public class P2Test {
         assertNotNull(rightBottomSiblings.get(EdgeDirection.NW));
         assertNotNull(rightBottomSiblings.get(EdgeDirection.SW));
 
+        assertNotNull(topESiblings.get(EdgeDirection.S));
         assertNotNull(topESiblings.get(EdgeDirection.SW));
         assertNotNull(topESiblings.get(EdgeDirection.SE));
-        assertNotNull(topESiblings.get(EdgeDirection.S));
-
-        assertNotNull(bottomESibilings.get(EdgeDirection.NW));
-        assertNotNull(bottomESibilings.get(EdgeDirection.NE));
-        assertNotNull(bottomESibilings.get(EdgeDirection.N));
 
         assertNotNull(middleESiblings.get(EdgeDirection.N));
         assertNotNull(middleESiblings.get(EdgeDirection.NE));
@@ -137,13 +134,17 @@ public class P2Test {
         assertNotNull(middleESiblings.get(EdgeDirection.S));
         assertNotNull(middleESiblings.get(EdgeDirection.SW));
         assertNotNull(middleESiblings.get(EdgeDirection.NW));
+
+        assertNotNull(bottomESibilings.get(EdgeDirection.NW));
+        assertNotNull(bottomESibilings.get(EdgeDirection.NE));
+        assertNotNull(bottomESibilings.get(EdgeDirection.N));
     }
 
     @Test
     public void shouldHaveCorrectSiblingsSize() {
-        Production p2 = new P2();
+        Production p2c = new P2c();
         Vertex rootVertex = prepareInitialGraph();
-        p2.apply(rootVertex);
+        p2c.apply(rootVertex);
 
         Vertex leftOrange = rootVertex.getChild(NE);
         Vertex rightOrange = rootVertex.getChild(SW);
@@ -155,13 +156,12 @@ public class P2Test {
         Vertex middleE = leftTopI.getSibling(SE);
         Vertex bottomE = leftBottomI.getSibling(SE);
 
-        assertTrue(leftTopI.getSiblingsEdges().size() >= 2);
-        assertTrue(leftBottomI.getSiblingsEdges().size() >= 2);
-        assertTrue(rightTopI.getSiblingsEdges().size()  >= 2);
-        assertTrue(rightBottomI.getSiblingsEdges().size() >= 2);
-        assertTrue(topE.getSiblingsEdges().size() >= 3);
-        assertTrue(middleE.getSiblingsEdges().size() >= 6);
-        assertTrue(bottomE.getSiblingsEdges().size() >= 3);
+        assertEquals(2, leftTopI.getSiblingsEdges().size());
+        assertEquals(2, leftBottomI.getSiblingsEdges().size());
+        assertEquals(2, rightTopI.getSiblingsEdges().size());
+        assertEquals(2, rightBottomI.getSiblingsEdges().size());
+        assertEquals(3, topE.getSiblingsEdges().size());
+        assertEquals(6, middleE.getSiblingsEdges().size());
+        assertEquals(3, bottomE.getSiblingsEdges().size());
     }
-
 }
