@@ -9,7 +9,11 @@ import edu.agh.gg.grammar.P2;
 import edu.agh.gg.grammar.P3;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 public class SerializerTest {
     @Test
@@ -29,9 +33,9 @@ public class SerializerTest {
         P3 p3 = new P3();
         p3.apply(vertex);
 
-        String serialized = vertex.serialize();
-
-        String expected = "an n1 label:i ui.class:i\n" +
+        List<String> serializedLines = Arrays.asList(vertex.serialize().split("\n"));
+        List<String> expectedLines = Arrays.asList(
+                ("an n1 label:i ui.class:i\n" +
                 "ae e1 n1 n2 EdgeDirection=NW\n" +
                 "an n2 label:E ui.class:E\n" +
                 "ae e2 n2 n4 EdgeDirection=E\n" +
@@ -573,8 +577,15 @@ public class SerializerTest {
                 "an n18 label:E ui.class:E\n" +
                 "ae e456 n18 n9 EdgeDirection=NW\n" +
                 "ae e457 n18 n17 EdgeDirection=W\n" +
-                "ae e458 n18 n15 EdgeDirection=N\n";
+                "ae e458 n18 n15 EdgeDirection=N\n").split("\n"));
 
-        assertEquals(expected, serialized);
+        assertListsAreEqualIgnoringOrder(expectedLines, serializedLines);
+    }
+
+    private static void assertListsAreEqualIgnoringOrder(List<String> expectedLines, List<String> serializedLines) {
+        assertTrue(expectedLines.size() == serializedLines.size());
+        Collections.sort(expectedLines);
+        Collections.sort(serializedLines);
+        assertTrue(expectedLines.equals(serializedLines));
     }
 }
