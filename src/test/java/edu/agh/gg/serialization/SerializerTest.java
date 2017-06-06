@@ -11,6 +11,8 @@ import edu.agh.gg.serialization.idgenerator.Id;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class SerializerTest {
     @Before
     public void setUp() throws Exception {
@@ -577,9 +579,7 @@ public class SerializerTest {
                 "ae e456 n23 n26 EdgeDirection=S\n" +
                 "ae e457 n23 n47 EdgeDirection=SW\n" +
                 "ae e458 n23 n19 EdgeDirection=SE\n";
-
-        System.out.println(vertex.serialize());
-
-//        assertEquals(expected, vertex.serialize());
+        
+        assertEquals(expected, vertex.serialize());
     }
 }
