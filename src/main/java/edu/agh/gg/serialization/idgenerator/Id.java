@@ -19,4 +19,9 @@ public class Id {
         return NODE + nodeID.addAndGet(1);
     }
 
+    public static void resetIds() {
+        edgeID.set(0);
+        nodeID.set(0);
+    }
+
 }
