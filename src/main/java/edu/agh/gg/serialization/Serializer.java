@@ -40,7 +40,7 @@ public class Serializer {
     }
 
     private boolean shouldAppendDeeply() {
-        if (!notFirstNode) {
+        if (notFirstNode) {
             return vertex.getLabel() != VertexLabel.E;
         } else {
             notFirstNode = true;
