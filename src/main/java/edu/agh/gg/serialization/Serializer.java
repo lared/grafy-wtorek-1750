@@ -43,7 +43,7 @@ public class Serializer {
         if (!notFirstNode) {
             return vertex.getLabel() != VertexLabel.E;
         } else {
-            notFirstNode = false;
+            notFirstNode = true;
             return true;
         }
     }
