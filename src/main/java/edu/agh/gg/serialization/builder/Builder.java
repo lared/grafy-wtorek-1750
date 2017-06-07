@@ -10,7 +10,7 @@ import java.util.Map;
 public interface Builder {
     void appendNode(VertexLabel label);
 
-    void appendEdgeToNode(Map.Entry<EdgeDirection, Vertex> entry);
+    void appendEdgeToNode(EdgeDirection edgeDirection, Vertex vertex);
 
     void append(String serialize);
 

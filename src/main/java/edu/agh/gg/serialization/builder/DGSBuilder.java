@@ -32,10 +32,10 @@ public class DGSBuilder implements Builder{
     }
 
     @Override
-    public void appendEdgeToNode(Map.Entry<EdgeDirection, Vertex> entry) {
+    public void appendEdgeToNode(EdgeDirection edgeDirection, Vertex vertex) {
         append(EDGE_DGS_PREFIX + SPACE + Id.getEdgeID() + SPACE + nodeUniqueID
-                + SPACE + entry.getValue().getUniqueID()
-                + SPACE + ATTRIBUTE_EDGE_DIRECTION + entry.getKey().serialize()+ NEW_LINE);
+                + SPACE + vertex.getUniqueID()
+                + SPACE + ATTRIBUTE_EDGE_DIRECTION + edgeDirection.serialize()+ NEW_LINE);
     }
 
     @Override
