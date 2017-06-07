@@ -6,15 +6,13 @@ import edu.agh.gg.VertexLabel;
 import edu.agh.gg.serialization.builder.Builder;
 import edu.agh.gg.serialization.builder.DGSBuilder;
 
-import java.util.AbstractMap;
-import java.util.Arrays;
-import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
 public class Serializer {
 
     private Builder builder;
     private Vertex vertex;
+    private static boolean notFirstNode = false;
 
     public Serializer(Vertex vertex) {
         this.vertex = vertex;
@@ -42,6 +40,11 @@ public class Serializer {
     }
 
     private boolean shouldAppendDeeply() {
-        return vertex.getLabel() != VertexLabel.E;
+        if (!notFirstNode) {
+            return vertex.getLabel() != VertexLabel.E;
+        } else {
+            notFirstNode = false;
+            return true;
+        }
     }
 }

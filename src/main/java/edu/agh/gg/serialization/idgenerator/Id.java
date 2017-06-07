@@ -12,11 +12,11 @@ public class Id {
 
 
     public static String getEdgeID(){
-        return EDGE + edgeID.addAndGet(1);
+        return EDGE + edgeID.incrementAndGet();
     }
 
     public static String getNodeID(){
-        return NODE + nodeID.addAndGet(1);
+        return NODE + nodeID.incrementAndGet();
     }
 
     public static void resetIds() {
