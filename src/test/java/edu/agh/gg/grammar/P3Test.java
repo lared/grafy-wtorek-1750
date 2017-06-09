@@ -15,12 +15,11 @@ import static org.junit.Assert.*;
 public class P3Test {
     private Vertex rootVertex;
 
-    @Before
-    public void prepare(){
-        rootVertex = Vertex.withoutParent(VertexLabel.E);
+    public static Vertex prepareInitialGraph() {
+        Vertex vertex = Vertex.withoutParent(VertexLabel.E);
 
-        Vertex topOrangeI = rootVertex.createChild(NW);
-        Vertex bottomOrangeI = rootVertex.createChild(SW);
+        Vertex topOrangeI = vertex.createChild(NW);
+        Vertex bottomOrangeI = vertex.createChild(SW);
         topOrangeI.setLabel(I);
         bottomOrangeI.setLabel(I);
 
@@ -53,6 +52,13 @@ public class P3Test {
         middleTopE.connectToSibling(E, rightTopE);
         leftBottomE.connectToSibling(E, middleBottomE);
         middleBottomE.connectToSibling(E, rightBottomE);
+
+        return vertex;
+    }
+
+    @Before
+    public void prepare() {
+        rootVertex = prepareInitialGraph();
     }
 
     @Test
@@ -190,7 +196,7 @@ public class P3Test {
 
         assertTrue(leftOrange.getSiblingsEdges().size() >= 0);
         assertTrue(bottomOrangeI.getSiblingsEdges().size() >= 0);
-        assertTrue(leftTopGrayI.getSiblingsEdges().size()  >= 2);
+        assertTrue(leftTopGrayI.getSiblingsEdges().size() >= 2);
         assertTrue(rightTopGrayI.getSiblingsEdges().size() >= 2);
         assertTrue(leftBottomGrayI.getSiblingsEdges().size() >= 2);
         assertTrue(rightBottomGrayI.getSiblingsEdges().size() >= 2);
