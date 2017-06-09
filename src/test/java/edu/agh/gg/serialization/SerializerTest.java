@@ -4,7 +4,6 @@ import edu.agh.gg.EdgeDirection;
 import edu.agh.gg.Vertex;
 import edu.agh.gg.VertexLabel;
 import edu.agh.gg.grammar.*;
-import edu.agh.gg.serialization.idgenerator.Id;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 public class SerializerTest {
     @Before
     public void setUp() throws Exception {
-        Id.resetIds();
+        Serializer.reset();
     }
 
     @Test

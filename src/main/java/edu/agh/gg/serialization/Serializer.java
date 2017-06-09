@@ -5,6 +5,7 @@ import edu.agh.gg.Vertex;
 import edu.agh.gg.VertexLabel;
 import edu.agh.gg.serialization.builder.Builder;
 import edu.agh.gg.serialization.builder.DGSBuilder;
+import edu.agh.gg.serialization.idgenerator.Id;
 
 import java.util.concurrent.ConcurrentMap;
 
@@ -46,5 +47,10 @@ public class Serializer {
             notFirstNode = true;
             return true;
         }
+    }
+
+    public static void reset() {
+        notFirstNode = false;
+        Id.resetIds();
     }
 }
