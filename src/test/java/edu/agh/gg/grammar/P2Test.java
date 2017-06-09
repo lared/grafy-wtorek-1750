@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 
 public class P2Test {
 
-    private Vertex prepareInitialGraph() {
+    public static Vertex prepareInitialGraph() {
         Vertex greenE = Vertex.withoutParent(VertexLabel.E);
 
         Vertex leftOrange = greenE.createChild(NE);
