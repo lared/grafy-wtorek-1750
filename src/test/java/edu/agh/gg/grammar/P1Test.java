@@ -15,9 +15,9 @@ public class P1Test {
     @Test
     public void shouldCreateNewLevel() throws Exception {
         Vertex disconnectedNode = Vertex.withoutParent(VertexLabel.I);
-        Production p1 = new P1();
+        Production p1 = new P1(disconnectedNode);
 
-        p1.apply(disconnectedNode);
+        p1.apply();
 
         assertEquals(4, disconnectedNode.getChildrenEdges().size());
     }
@@ -25,8 +25,8 @@ public class P1Test {
     @Test
     public void sizesOfTheSiblingsShouldBe4or5P1() throws Exception {
         Vertex disconnectedNode = Vertex.withoutParent(VertexLabel.I);
-        Production p1 = new P1();
-        p1.apply(disconnectedNode);
+        Production p1 = new P1(disconnectedNode);
+        p1.apply();
         
         Vertex northWestChild = disconnectedNode.getChild(EdgeDirection.NW);
         Vertex central = northWestChild.getSibling(EdgeDirection.SE);
@@ -63,8 +63,8 @@ public class P1Test {
     @Test
     public void shouldHaveCorrectSiblingsDirections() throws Exception {
         Vertex disconnectedNode = Vertex.withoutParent(VertexLabel.I);
-        Production p1 = new P1();
-        p1.apply(disconnectedNode);
+        Production p1 = new P1(disconnectedNode);
+        p1.apply();
         Vertex northWestChildren = disconnectedNode.getChild(EdgeDirection.NW);
         Vertex central = northWestChildren.getSibling(EdgeDirection.SE);       
         
@@ -134,8 +134,8 @@ public class P1Test {
     @Test
     public void shouldHaveCorrectLabels() throws Exception {
         Vertex disconnectedNode = Vertex.withoutParent(VertexLabel.I);
-        Production p1 = new P1();
-        p1.apply(disconnectedNode);
+        Production p1 = new P1(disconnectedNode);
+        p1.apply();
         Vertex northWestChildren = disconnectedNode.getChild(EdgeDirection.NW);
         Vertex central = northWestChildren.getSibling(EdgeDirection.SE);       
         

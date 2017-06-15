@@ -20,8 +20,8 @@ public class SerializerTest {
     @Test
     public void testP0Serialization() throws Exception {
         Vertex vertex = Vertex.withoutParent(VertexLabel.I);
-        P0 p0 = new P0();
-        p0.apply(vertex);
+        P0 p0 = new P0(vertex);
+        p0.apply();
 
         String expected = "an n1 label:I ui.class:I\n" +
                 "ae e1 n1 n4 EdgeDirection=NE\n" +
@@ -51,8 +51,8 @@ public class SerializerTest {
     @Test
     public void testP1Serialization() throws Exception {
         Vertex vertex = Vertex.withoutParent(VertexLabel.I);
-        P1 p1 = new P1();
-        p1.apply(vertex);
+        P1 p1 = new P1(vertex);
+        p1.apply();
 
         String expected = "an n1 label:i ui.class:i\n" +
                 "ae e1 n1 n4 EdgeDirection=NE\n" +
@@ -186,8 +186,8 @@ public class SerializerTest {
     @Test
     public void testP2Serialization() throws Exception {
         Vertex vertex = P2Test.prepareInitialGraph();
-        P2 p2 = new P2();
-        p2.apply(vertex);
+        P2 p2 = new P2(vertex);
+        p2.apply();
 
         String expected = "an n1 label:E ui.class:E\n" +
                 "ae e1 n1 n2 EdgeDirection=NE\n" +
@@ -230,8 +230,8 @@ public class SerializerTest {
     @Test
     public void testP3Serialization() throws Exception {
         Vertex vertex = P3Test.prepareInitialGraph();
-        P3 p3 = new P3();
-        p3.apply(vertex);
+        P3 p3 = new P3(vertex);
+        p3.apply();
 
         String expected = "an n1 label:E ui.class:E\n" +
                 "ae e1 n1 n3 EdgeDirection=SW\n" +
@@ -273,28 +273,27 @@ public class SerializerTest {
 
     @Test
     public void testMultipleProductions() throws Exception {
-        Production p0 = new P0();
-        Production p1 = new P1();
-        Production p2 = new P2();
-        Production p3 = new P3();
-
         Vertex vertex = Vertex.withoutParent(VertexLabel.I);
-        p0.apply(vertex);
-        p1.apply(vertex);
 
-        Map<EdgeDirection, Vertex> vertexChildrenEdges = vertex.getChildrenEdges();
-        for (EdgeDirection edgeDirection : EdgeDirection.values()) {
-            if (vertexChildrenEdges.containsKey(edgeDirection)) {
-                Vertex childVertex = vertexChildrenEdges.get(edgeDirection);
+        Production p0 = new P0(vertex);
+        Production p1 = new P1(vertex);
+        Production p2 = new P2(vertex);
+        Production p3 = new P3(vertex);
 
-                if (childVertex.getParentDirection() != EdgeDirection.NW) {
-                    p1.apply(childVertex);
-                }
-            }
-        }
+        p0.apply();
+        p1.apply();
 
-        p2.apply(vertex);
-        p3.apply(vertex);
+        Map<EdgeDirection, Vertex> childrenEdges = vertex.getChildrenEdges();
+        Production p1a3 = new P1(childrenEdges.get(EdgeDirection.NW));
+        Production p1a1 = new P1(childrenEdges.get(EdgeDirection.NE));
+        Production p1a2 = new P1(childrenEdges.get(EdgeDirection.SW));
+
+        p1a1.apply();
+        p1a2.apply();
+        p1a3.apply();
+
+        p2.apply();
+        p3.apply();
 
         String expected = "an n1 label:i ui.class:i\n" +
                 "ae e1 n1 n4 EdgeDirection=NE\n" +

@@ -2,11 +2,22 @@ package edu.agh.gg.grammar;
 
 import edu.agh.gg.Vertex;
 
+import java.util.concurrent.CyclicBarrier;
+
 import static edu.agh.gg.EdgeDirection.*;
 import static edu.agh.gg.VertexLabel.E;
 import static edu.agh.gg.VertexLabel.I;
 
-public class P2 implements Production {
+public class P2 extends Production {
+
+    public P2(Vertex vertex, CyclicBarrier barrier) {
+        super(vertex, barrier);
+    }
+
+    public P2(Vertex vertex) {
+        super(vertex);
+    }
+
     @Override
     public boolean applicableTo(Vertex vertex) {
         Vertex leftOrangeI = vertex.getChild(NE);
@@ -54,7 +65,7 @@ public class P2 implements Production {
     }
 
     @Override
-    public void apply(Vertex vertex) {
+    public void apply() {
         Vertex leftTopGrayI = vertex.getChild(NE).getChild(NE);
         Vertex leftBottomGrayI = vertex.getChild(NE).getChild(SE);
         Vertex leftTopE = leftTopGrayI.getSibling(NE);
@@ -79,5 +90,7 @@ public class P2 implements Production {
         leftTopGrayI.connectToSibling(SE, rightMiddleE);
         leftBottomGrayI.connectToSibling(NE, rightMiddleE);
         leftBottomGrayI.connectToSibling(SE, rightBottomE);
+
+        awaitBarrier();
     }
 }
