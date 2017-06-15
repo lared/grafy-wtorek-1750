@@ -1,6 +1,7 @@
 package edu.agh.gg;
 
 import edu.agh.gg.grammar.*;
+import edu.agh.gg.visualization.PositionCalc;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.stream.file.FileSinkImages;
@@ -30,11 +31,14 @@ public class Visualizer {
         applyX3(p1, vertex, "P1X3");
         apply(p2, vertex, "P2");
         apply(p3, vertex, "P3");
+
+        PositionCalc.calculatePositions(vertex);
+        displayGraph("xxx", vertex.serialize());
     }
 
     private static void apply(Production p, Vertex vertex, String name) {
         p.apply(vertex);
-        displayGraph(name, vertex.serialize());
+//        displayGraph(name, vertex.serialize());
     }
 
     private static void applyX3(Production p1, Vertex vertex, String name) {
@@ -42,7 +46,7 @@ public class Visualizer {
             if (childVertex.getParentDirection().equals(EdgeDirection.NW)) continue;
             p1.apply(childVertex);
         }
-        displayGraph(name, vertex.serialize());
+//        displayGraph(name, vertex.serialize());
     }
 
     private static void displayGraph(String graphName, String serialization) {
