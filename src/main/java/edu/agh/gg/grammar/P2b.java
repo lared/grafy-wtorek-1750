@@ -103,7 +103,5 @@ public class P2b extends Production{
 
         leftTopGrayI.connectToSibling(SE, rightMiddleE);
         leftBottomGrayI.connectToSibling(NE, rightMiddleE);
-
-        awaitBarrier();
     }
 }

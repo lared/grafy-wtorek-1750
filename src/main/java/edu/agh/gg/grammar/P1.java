@@ -79,6 +79,5 @@ public class P1 extends Production {
         middleMiddleE.connectToSibling(EdgeDirection.S, middleBottomE);
 
         vertex.setLabel(VertexLabel.i);
-        awaitBarrier();
     }
 }

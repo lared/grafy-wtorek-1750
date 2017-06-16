@@ -10,26 +10,27 @@ public abstract class Production extends Thread {
     protected final Vertex vertex;
     private final CyclicBarrier barrier;
 
-    public Production(Vertex vertex, CyclicBarrier barrier) {
+    protected Production(Vertex vertex, CyclicBarrier barrier) {
         this.vertex = vertex;
         this.barrier = barrier;
     }
 
-    public Production(Vertex vertex) {
+    protected Production(Vertex vertex) {
         this.barrier = new CyclicBarrier(1);
         this.vertex = vertex;
     }
 
-    public abstract void apply();
+    protected abstract void apply();
 
-    public abstract boolean applicableTo(Vertex vertex);
+    protected abstract boolean applicableTo(Vertex vertex);
 
     @Override
     public void run() {
         apply();
+        awaitBarrier();
     }
 
-    protected void awaitBarrier(){
+    private void awaitBarrier(){
         try {
             barrier.await();
         } catch (InterruptedException | BrokenBarrierException e) {

@@ -40,8 +40,6 @@ public class P0 extends Production {
         vertex.connectToSibling(EdgeDirection.SE, rightBottom);
 
         vertex.setLabel(VertexLabel.I);
-
-        awaitBarrier();
     }
 
 }

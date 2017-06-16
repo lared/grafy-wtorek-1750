@@ -85,7 +85,5 @@ public class P3 extends Production {
         leftTopGrayI.connectToSibling(SE, middleBottomE);
         rightTopGrayI.connectToSibling(SW, middleBottomE);
         rightTopGrayI.connectToSibling(SE, rightBottomE);
-
-        awaitBarrier();
     }
 }

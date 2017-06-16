@@ -92,7 +92,5 @@ public class P2c extends Production {
         leftTopGrayI.connectToSibling(NE, rightTopE);
         leftTopGrayI.connectToSibling(SE, rightMiddleE);
         leftBottomGrayI.connectToSibling(NE, rightMiddleE);
-
-        awaitBarrier();
     }
 }
