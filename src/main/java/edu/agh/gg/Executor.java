@@ -23,15 +23,11 @@ public class Executor extends Thread {
 
     @Override
     public void run() {
-        //[(P0)]
-        barrier = new CyclicBarrier(1 + 1);
+        //[(P0)(P1)]
+        barrier = new CyclicBarrier(2 + 1);
         Production p0 = new P0(vertex, barrier);
-        apply(p0, "P0");
-
-        //[(P1)]
-        barrier = new CyclicBarrier(1 + 1);
         Production p1 = new P1(vertex, barrier);
-        apply(p1, "P1");
+        apply(Arrays.asList(p0, p1), "P0P1");
 
         //[(P1)1(P1)2(P1)3] apply P1 to three children of initial vertex
         Map<EdgeDirection, Vertex> childrenEdges = vertex.getChildrenEdges();
@@ -41,15 +37,11 @@ public class Executor extends Thread {
         Production p1a2 = new P1(childrenEdges.get(EdgeDirection.SW), barrier);
         apply(Arrays.asList(p1a1, p1a2, p1a3), "P1X3");
 
-        //[(P2)]
-        barrier = new CyclicBarrier(1 + 1);
+        //[(P2)(P3)]
+        barrier = new CyclicBarrier(2 + 1);
         Production p2 = new P2(vertex, barrier);
-        apply(p2, "P2");
-
-        //[(P3)]
-        barrier = new CyclicBarrier(1 + 1);
         Production p3 = new P3(vertex, barrier);
-        apply(p3, "P3");
+        apply(Arrays.asList(p2, p3), "P2P3");
 
         visualizeProductions();
     }
