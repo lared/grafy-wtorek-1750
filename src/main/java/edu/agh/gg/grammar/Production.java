@@ -20,9 +20,9 @@ public abstract class Production extends Thread {
         this.vertex = vertex;
     }
 
-    protected abstract void apply();
+    public abstract void apply();
 
-    protected abstract boolean applicableTo(Vertex vertex);
+    public abstract boolean applicableTo(Vertex vertex);
 
     @Override
     public void run() {
