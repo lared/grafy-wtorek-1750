@@ -4,7 +4,17 @@ import edu.agh.gg.EdgeDirection;
 import edu.agh.gg.Vertex;
 import edu.agh.gg.VertexLabel;
 
-public class P1 implements Production {
+import java.util.concurrent.CyclicBarrier;
+
+public class P1 extends Production {
+
+    public P1(Vertex vertex, CyclicBarrier barrier) {
+        super(vertex, barrier);
+    }
+
+    public P1(Vertex vertex) {
+        super(vertex);
+    }
 
     @Override
     public boolean applicableTo(Vertex vertex) {
@@ -12,7 +22,7 @@ public class P1 implements Production {
     }
 
     @Override
-    public void apply(Vertex vertex) {
+    public void apply() {
         Vertex leftTopI = vertex.createChild(EdgeDirection.NW);
         Vertex leftBottomI = vertex.createChild(EdgeDirection.SW);
         Vertex rightTopI = vertex.createChild(EdgeDirection.NE);

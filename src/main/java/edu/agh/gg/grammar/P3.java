@@ -3,12 +3,22 @@ package edu.agh.gg.grammar;
 import edu.agh.gg.EdgeDirection;
 import edu.agh.gg.Vertex;
 
+import java.util.concurrent.CyclicBarrier;
+
 import static edu.agh.gg.EdgeDirection.*;
 import static edu.agh.gg.VertexLabel.E;
 import static edu.agh.gg.VertexLabel.I;
 
 
-public class P3 implements Production {
+public class P3 extends Production {
+
+    public P3(Vertex vertex, CyclicBarrier barrier) {
+        super(vertex, barrier);
+    }
+
+    public P3(Vertex vertex) {
+        super(vertex);
+    }
 
     @Override
     public boolean applicableTo(Vertex vertex) {
@@ -50,7 +60,7 @@ public class P3 implements Production {
     }
 
     @Override
-    public void apply(Vertex vertex) {
+    public void apply() {
         Vertex leftTopGrayI = vertex.getChild(NW).getChild(SW);
         Vertex rightTopGrayI = vertex.getChild(NW).getChild(SE);
         Vertex leftTopE = leftTopGrayI.getSibling(SW);

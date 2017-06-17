@@ -11,7 +11,7 @@ public class P0Test {
     @Test
     public void shouldApplyToSNode() throws Exception {
         Vertex disconnectedNode = Vertex.withoutParent(VertexLabel.S);
-        Production p0 = new P0();
+        Production p0 = new P0(disconnectedNode);
 
         assertTrue(p0.applicableTo(disconnectedNode));
     }
@@ -21,7 +21,7 @@ public class P0Test {
         Vertex node1 = Vertex.withoutParent(VertexLabel.I);
         Vertex node2 = Vertex.withoutParent(VertexLabel.E);
         node1.connectToSibling(N, node2);
-        Production p0 = new P0();
+        Production p0 = new P0(node1);
 
         assertFalse(p0.applicableTo(node1));
         assertFalse(p0.applicableTo(node2));
@@ -30,9 +30,9 @@ public class P0Test {
     @Test
     public void shouldNotCreateAnyChildren() throws Exception {
         Vertex disconnectedNode = Vertex.withoutParent(VertexLabel.S);
-        Production p0 = new P0();
+        Production p0 = new P0(disconnectedNode);
 
-        p0.apply(disconnectedNode);
+        p0.apply();
 
         assertEquals(0, disconnectedNode.getChildrenEdges().size());
     }
@@ -40,9 +40,9 @@ public class P0Test {
     @Test
     public void shouldCreateTheRequiredLevelStructureAndNothingElse() throws Exception {
         Vertex disconnectedNode = Vertex.withoutParent(VertexLabel.S);
-        Production p1 = new P0();
+        Production p0 = new P0(disconnectedNode);
 
-        p1.apply(disconnectedNode);
+        p0.apply();
 
         assertEquals(4, disconnectedNode.getSiblingsEdges().size());
         Vertex leftTop = disconnectedNode.getSibling(NW);
