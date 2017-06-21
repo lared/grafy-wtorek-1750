@@ -6,11 +6,9 @@ import edu.agh.gg.Vertex;
 import edu.agh.gg.VertexLabel;
 import edu.agh.gg.serialization.idgenerator.Id;
 
-import java.text.DecimalFormat;
 import java.util.Locale;
-import java.util.Map;
 
-public class DGSBuilder implements Builder{
+public class DGSBuilder implements Builder {
 
     private static final String NODE_DGS_PREFIX = "an";
     private static final String EDGE_DGS_PREFIX = "ae";
@@ -23,7 +21,7 @@ public class DGSBuilder implements Builder{
     private String nodeUniqueID;
     private String dgsBuilderOutput;
 
-    public DGSBuilder(String nodeUniqueID){
+    public DGSBuilder(String nodeUniqueID) {
         this.nodeUniqueID = nodeUniqueID;
         this.dgsBuilderOutput = "";
     }
@@ -31,15 +29,19 @@ public class DGSBuilder implements Builder{
     @Override
     public void appendNode(Vertex vertex) {
         VertexLabel label = vertex.getLabel();
-        append(NODE_DGS_PREFIX + SPACE + nodeUniqueID + SPACE + coordinates(vertex.getPosition()) + SPACE + ATTRIBUTE_LABEL + label.serialize()
-                + SPACE + ATTRIBUTE_CLASS + label.serialize() + NEW_LINE);
+        append(NODE_DGS_PREFIX + SPACE + nodeUniqueID + SPACE + ATTRIBUTE_LABEL + label.serialize() + SPACE
+                + ATTRIBUTE_CLASS + label.serialize());
+        if (vertex.getPosition() != null) {
+            append(SPACE + coordinates(vertex.getPosition()) + SPACE);
+        }
+        append(NEW_LINE);
     }
 
     @Override
     public void appendEdgeToNode(EdgeDirection edgeDirection, Vertex vertex) {
         append(EDGE_DGS_PREFIX + SPACE + Id.getEdgeID() + SPACE + nodeUniqueID
                 + SPACE + vertex.getUniqueID()
-                + SPACE + ATTRIBUTE_EDGE_DIRECTION + edgeDirection.serialize()+ NEW_LINE);
+                + SPACE + ATTRIBUTE_EDGE_DIRECTION + edgeDirection.serialize() + NEW_LINE);
     }
 
     @Override
