@@ -1,5 +1,6 @@
 package edu.agh.gg.grammar;
 
+import edu.agh.gg.EdgeDirection;
 import edu.agh.gg.Vertex;
 
 import java.util.concurrent.CyclicBarrier;
@@ -82,6 +83,10 @@ public class P2 extends Production {
         leftMiddleE.getSiblingsEdges().remove(S, leftBottomE);
         leftBottomE.getSiblingsEdges().remove(N, leftMiddleE);
 
+        leftTopE = leftTopE.getSibling(W);
+        leftMiddleE = leftMiddleE.getSibling(W);
+        leftBottomE = leftBottomE.getSibling(W);
+
         Vertex rightTopE = vertex.getChild(SW).getChild(NW).getSibling(NW);
         Vertex rightMiddleE = vertex.getChild(SW).getChild(NW).getSibling(SW);
         Vertex rightBottomE = vertex.getChild(SW).getChild(SW).getSibling(SW);
@@ -90,5 +95,9 @@ public class P2 extends Production {
         leftTopGrayI.connectToSibling(SE, rightMiddleE);
         leftBottomGrayI.connectToSibling(NE, rightMiddleE);
         leftBottomGrayI.connectToSibling(SE, rightBottomE);
+
+        leftTopE.connectToSibling(EdgeDirection.E, rightTopE);
+        leftMiddleE.connectToSibling(EdgeDirection.E, rightMiddleE);
+        leftBottomE.connectToSibling(EdgeDirection.E, rightBottomE);
     }
 }

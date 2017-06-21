@@ -77,13 +77,21 @@ public class P3 extends Production {
         middleTopE.getSiblingsEdges().remove(E, rightTopE);
         rightTopE.getSiblingsEdges().remove(W, middleTopE);
 
-        Vertex leftBottomE = vertex.getChild(SW).getChild(NE).getSibling(NW);
-        Vertex middleBottomE = vertex.getChild(SW).getChild(NE).getSibling(NE);
-        Vertex rightBottomE = vertex.getChild(SW).getChild(NW).getSibling(NE);
+        leftTopE = leftTopE.getSibling(N);
+        middleTopE = middleTopE.getSibling(N);
+        rightTopE = rightTopE.getSibling(N);
+
+        Vertex leftBottomE = vertex.getChild(SW).getChild(NW).getSibling(NW);
+        Vertex middleBottomE = vertex.getChild(SW).getChild(NE).getSibling(NW);
+        Vertex rightBottomE = vertex.getChild(SW).getChild(NE).getSibling(NE);
 
         leftTopGrayI.connectToSibling(SW, leftBottomE);
         leftTopGrayI.connectToSibling(SE, middleBottomE);
         rightTopGrayI.connectToSibling(SW, middleBottomE);
         rightTopGrayI.connectToSibling(SE, rightBottomE);
+
+        leftTopE.connectToSibling(S, leftBottomE);
+        middleTopE.connectToSibling(S, middleBottomE);
+        rightTopE.connectToSibling(S, rightBottomE);
     }
 }

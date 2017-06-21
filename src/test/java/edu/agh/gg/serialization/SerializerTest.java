@@ -4,6 +4,7 @@ import edu.agh.gg.EdgeDirection;
 import edu.agh.gg.Vertex;
 import edu.agh.gg.VertexLabel;
 import edu.agh.gg.grammar.*;
+import edu.agh.gg.visualization.PositionCalc;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,6 +46,7 @@ public class SerializerTest {
                 "ae e15 n2 n1 EdgeDirection=SE\n" +
                 "ae e16 n2 n3 EdgeDirection=S\n";
 
+        PositionCalc.calculatePositions(vertex);
         assertEquals(expected, vertex.serialize());
     }
 
@@ -180,6 +182,7 @@ public class SerializerTest {
                 "ae e103 n6 n2 EdgeDirection=SE\n" +
                 "ae e104 n6 n9 EdgeDirection=S\n";
 
+        PositionCalc.calculatePositions(vertex);
         assertEquals(expected, vertex.serialize());
     }
 
@@ -224,6 +227,7 @@ public class SerializerTest {
                 "ae e25 n13 n5 EdgeDirection=NW\n" +
                 "ae e26 n1 n3 EdgeDirection=SW\n";
 
+        PositionCalc.calculatePositions(vertex);
         assertEquals(expected, vertex.serialize());
     }
 
@@ -268,6 +272,7 @@ public class SerializerTest {
                 "ae e25 n12 n4 EdgeDirection=NW\n" +
                 "ae e26 n1 n2 EdgeDirection=NW\n";
 
+        PositionCalc.calculatePositions(vertex);
         assertEquals(expected, vertex.serialize());
     }
 
@@ -839,6 +844,7 @@ public class SerializerTest {
                 "ae e457 n49 n45 EdgeDirection=SE\n" +
                 "ae e458 n49 n52 EdgeDirection=S\n";
 
+        PositionCalc.calculatePositions(vertex);
         assertEquals(expected, vertex.serialize());
     }
 }
