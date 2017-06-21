@@ -5,14 +5,16 @@ import edu.agh.gg.serialization.idgenerator.Id;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 public class Vertex implements Serializable {
     private final String uniqueID;
     private final Vertex parent;
     private final EdgeDirection parentDirection;
-    private final ConcurrentMap<EdgeDirection, Vertex> childrenEdges = new ConcurrentHashMap<>();
-    private final ConcurrentMap<EdgeDirection, Vertex> siblingsEdges = new ConcurrentHashMap<>();
+    private final ConcurrentMap<EdgeDirection, Vertex> childrenEdges = new ConcurrentSkipListMap<>();
+    private final ConcurrentMap<EdgeDirection, Vertex> siblingsEdges = new ConcurrentSkipListMap<>();
     private final ConcurrentMap<String, Object> attributes = new ConcurrentHashMap<>();
+    private Coordinates position;
     private VertexLabel label;
 
     private Vertex(Vertex parent, EdgeDirection parentDirection, VertexLabel label) {
@@ -35,12 +37,15 @@ public class Vertex implements Serializable {
     }
 
     public void connectToSibling(EdgeDirection direction, Vertex sibling) {
+//        sibling.position = direction.shift(position);
         siblingsEdges.put(direction, sibling);
         sibling.siblingsEdges.put(direction.opposite(), this);
     }
 
     public Vertex createChild(EdgeDirection direction) {
         Vertex child = new Vertex(this, direction.opposite(), label);
+//        Vertex child = new Vertex(this, direction.opposite(), label, direction.shift(position).shifted(Shifts.CHILD_SHIFT));
+
         childrenEdges.put(direction, child);
         return child;
     }
@@ -83,6 +88,14 @@ public class Vertex implements Serializable {
 
     public String getUniqueID() {
         return uniqueID;
+    }
+
+    public Coordinates getPosition() {
+        return position;
+    }
+
+    public void setPosition(Coordinates position) {
+        this.position = position;
     }
 
     @Override

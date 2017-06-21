@@ -2,12 +2,11 @@ package edu.agh.gg.grammar;
 
 import edu.agh.gg.EdgeDirection;
 import edu.agh.gg.Vertex;
+import edu.agh.gg.VertexLabel;
 
 import java.util.concurrent.CyclicBarrier;
 
 import static edu.agh.gg.EdgeDirection.*;
-import static edu.agh.gg.VertexLabel.E;
-import static edu.agh.gg.VertexLabel.I;
 
 
 public class P3 extends Production {
@@ -34,21 +33,21 @@ public class P3 extends Production {
         Vertex leftBottomE = leftBottomGrayI.getSibling(NW);
         Vertex middleBottomE = leftBottomGrayI.getSibling(NE);
         Vertex rightBottomE = rightBottomGrayI.getSibling(NE);
-        return vertex.getLabel().equals(E)
-                && topOrangeI.getLabel().equals(I)
-                && bottomOrangeI.getLabel().equals(I)
-                && leftTopGrayI.getLabel().equals(I)
-                && rightTopGrayI.getLabel().equals(I)
-                && leftTopE.getLabel().equals(E)
-                && middleTopE.getLabel().equals(E)
+        return vertex.getLabel().equals(VertexLabel.E)
+                && topOrangeI.getLabel().equals(VertexLabel.I)
+                && bottomOrangeI.getLabel().equals(VertexLabel.I)
+                && leftTopGrayI.getLabel().equals(VertexLabel.I)
+                && rightTopGrayI.getLabel().equals(VertexLabel.I)
+                && leftTopE.getLabel().equals(VertexLabel.E)
+                && middleTopE.getLabel().equals(VertexLabel.E)
                 && rightTopGrayI.getSibling(SW) == middleTopE
-                && rightTopE.getLabel().equals(E) //top done
-                && leftBottomGrayI.getLabel().equals(I)
-                && rightBottomGrayI.getLabel().equals(I)
-                && leftBottomE.getLabel().equals(E)
-                && middleBottomE.getLabel().equals(E)
+                && rightTopE.getLabel().equals(VertexLabel.E) //top done
+                && leftBottomGrayI.getLabel().equals(VertexLabel.I)
+                && rightBottomGrayI.getLabel().equals(VertexLabel.I)
+                && leftBottomE.getLabel().equals(VertexLabel.E)
+                && middleBottomE.getLabel().equals(VertexLabel.E)
                 && rightBottomGrayI.getSibling(NW) == middleBottomE
-                && rightBottomE.getLabel().equals(E) //bottom done
+                && rightBottomE.getLabel().equals(VertexLabel.E) //bottom done
                 && leftTopE.getSibling(EdgeDirection.E) == middleTopE
                 && middleTopE.getSibling(W) == leftTopE
                 && middleTopE.getSibling(EdgeDirection.E) == rightTopE

@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 public interface Builder {
-    void appendNode(VertexLabel label);
+    void appendNode(Vertex vertex);
 
     void appendEdgeToNode(EdgeDirection edgeDirection, Vertex vertex);
 
