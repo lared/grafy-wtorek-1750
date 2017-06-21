@@ -5,13 +5,14 @@ import edu.agh.gg.serialization.idgenerator.Id;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 public class Vertex implements Serializable {
     private final String uniqueID;
     private final Vertex parent;
     private final EdgeDirection parentDirection;
-    private final ConcurrentMap<EdgeDirection, Vertex> childrenEdges = new ConcurrentHashMap<>();
-    private final ConcurrentMap<EdgeDirection, Vertex> siblingsEdges = new ConcurrentHashMap<>();
+    private final ConcurrentMap<EdgeDirection, Vertex> childrenEdges = new ConcurrentSkipListMap<>();
+    private final ConcurrentMap<EdgeDirection, Vertex> siblingsEdges = new ConcurrentSkipListMap<>();
     private final ConcurrentMap<String, Object> attributes = new ConcurrentHashMap<>();
     private Coordinates position;
     private VertexLabel label;

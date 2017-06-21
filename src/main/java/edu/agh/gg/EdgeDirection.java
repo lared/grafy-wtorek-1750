@@ -3,12 +3,12 @@ package edu.agh.gg;
 import edu.agh.gg.serialization.Serializable;
 
 public enum EdgeDirection implements Serializable {
+    SW(-2, Coordinates.of(-1.0, -1.0)),
+    S(-1, Coordinates.of(0.0, -1.0)),
     N(1, Coordinates.of(0.0,1.0)),
     NE(2, Coordinates.of(1.0,1.0)),
     E(3, Coordinates.of(0.0, 1.0)),
     SE(4, Coordinates.of(1.0, -1.0)),
-    S(-1, Coordinates.of(0.0, -1.0)),
-    SW(-2, Coordinates.of(-1.0, -1.0)),
     W(-3, Coordinates.of(0.0, -1.0)),
     NW(-4, Coordinates.of(-1.0, 1.0));
 
