@@ -13,6 +13,7 @@ public class Vertex implements Serializable {
     private final ConcurrentMap<EdgeDirection, Vertex> childrenEdges = new ConcurrentHashMap<>();
     private final ConcurrentMap<EdgeDirection, Vertex> siblingsEdges = new ConcurrentHashMap<>();
     private final ConcurrentMap<String, Object> attributes = new ConcurrentHashMap<>();
+    private Coordinates position;
     private VertexLabel label;
 
     private Vertex(Vertex parent, EdgeDirection parentDirection, VertexLabel label) {
@@ -83,6 +84,14 @@ public class Vertex implements Serializable {
 
     public String getUniqueID() {
         return uniqueID;
+    }
+
+    public Coordinates getPosition() {
+        return position;
+    }
+
+    public void setPosition(Coordinates position) {
+        this.position = position;
     }
 
     @Override

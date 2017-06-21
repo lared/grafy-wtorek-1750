@@ -22,7 +22,7 @@ public class Serializer {
 
     public String serialize() {
 
-        builder.appendNode(vertex.getLabel());
+        builder.appendNode(vertex);
         addToBuilder(vertex.getSiblingsEdges());
         addToBuilder(vertex.getChildrenEdges());
 
