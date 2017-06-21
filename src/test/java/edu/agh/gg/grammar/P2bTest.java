@@ -54,17 +54,17 @@ public class P2bTest {
 
     @Test
     public void shouldBeApplicableTo() throws Exception {
-        Production p2b = new P2b();
         Vertex rootVertex = this.prepareInitialGraph();
+        Production p2b = new P2b(rootVertex);
 
         assertTrue(p2b.applicableTo(rootVertex));
     }
 
     @Test
     public void shouldHaveCorrectLabels() throws Exception {
-        Production p2b = new P2b();
         Vertex rootVertex = prepareInitialGraph();
-        p2b.apply(rootVertex);
+        Production p2b = new P2b(rootVertex);
+        p2b.apply();
 
         Vertex leftOrange = rootVertex.getChild(NE);
         Vertex rightOrange = rootVertex.getChild(SW);
@@ -89,9 +89,9 @@ public class P2bTest {
 
     @Test
     public void shouldHaveCorrectSiblingsDirections() throws Exception {
-        Production p2b = new P2b();
         Vertex rootVertex = prepareInitialGraph();
-        p2b.apply(rootVertex);
+        Production p2b = new P2b(rootVertex);
+        p2b.apply();
 
         Vertex leftOrange = rootVertex.getChild(NE);
         Vertex rightOrange = rootVertex.getChild(SW);
@@ -141,9 +141,9 @@ public class P2bTest {
 
     @Test
     public void shouldHaveCorrectSiblingsSize() {
-        Production p2b = new P2b();
         Vertex rootVertex = prepareInitialGraph();
-        p2b.apply(rootVertex);
+        Production p2b = new P2b(rootVertex);
+        p2b.apply();
 
         Vertex leftOrange = rootVertex.getChild(NE);
         Vertex rightOrange = rootVertex.getChild(SW);

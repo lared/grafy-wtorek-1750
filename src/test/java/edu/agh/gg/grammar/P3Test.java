@@ -63,14 +63,14 @@ public class P3Test {
 
     @Test
     public void shouldBeApplicableTo() {
-        Production p3 = new P3();
+        Production p3 = new P3(rootVertex);
         assertTrue(p3.applicableTo(rootVertex));
     }
 
     @Test
     public void shouldHaveCorrectLabels() {
-        Production p3 = new P3();
-        p3.apply(rootVertex);
+        Production p3 = new P3(rootVertex);
+        p3.apply();
 
         Vertex leftOrange = rootVertex.getChild(NW);
         Vertex bottomOrangeI = rootVertex.getChild(SW);
@@ -102,8 +102,8 @@ public class P3Test {
 
     @Test
     public void shouldHaveCorrectSiblingsDirections() {
-        Production p3 = new P3();
-        p3.apply(rootVertex);
+        Production p3 = new P3(rootVertex);
+        p3.apply();
 
         Vertex leftOrange = rootVertex.getChild(NW);
         Vertex bottomOrangeI = rootVertex.getChild(SW);
@@ -176,8 +176,8 @@ public class P3Test {
 
     @Test
     public void shouldHaveCorrectSiblingsSize() {
-        Production p3 = new P3();
-        p3.apply(rootVertex);
+        Production p3 = new P3(rootVertex);
+        p3.apply();
 
         Vertex leftOrange = rootVertex.getChild(NW);
         Vertex bottomOrangeI = rootVertex.getChild(SW);

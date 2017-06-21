@@ -4,14 +4,25 @@ import edu.agh.gg.EdgeDirection;
 import edu.agh.gg.Vertex;
 import edu.agh.gg.VertexLabel;
 
-public class P0 implements Production {
+import java.util.concurrent.CyclicBarrier;
+
+public class P0 extends Production {
+
+    public P0(Vertex vertex, CyclicBarrier barrier) {
+        super(vertex, barrier);
+    }
+
+    public P0(Vertex vertex) {
+        super(vertex);
+    }
+
     @Override
     public boolean applicableTo(Vertex vertex) {
         return vertex.getLabel().equals(VertexLabel.S);
     }
 
     @Override
-    public void apply(Vertex vertex) {
+    public void apply() {
         Vertex leftTop = Vertex.withoutParent(VertexLabel.E);
         Vertex leftBottom = Vertex.withoutParent(VertexLabel.E);
         Vertex rightTop = Vertex.withoutParent(VertexLabel.E);
@@ -30,4 +41,5 @@ public class P0 implements Production {
 
         vertex.setLabel(VertexLabel.I);
     }
+
 }

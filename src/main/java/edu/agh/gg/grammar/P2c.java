@@ -2,13 +2,23 @@ package edu.agh.gg.grammar;
 
 import edu.agh.gg.Vertex;
 
+import java.util.concurrent.CyclicBarrier;
+
 import static edu.agh.gg.EdgeDirection.*;
 import static edu.agh.gg.EdgeDirection.NE;
 import static edu.agh.gg.EdgeDirection.SE;
 import static edu.agh.gg.VertexLabel.E;
 import static edu.agh.gg.VertexLabel.I;
 
-public class P2c implements Production {
+public class P2c extends Production {
+
+    public P2c(Vertex vertex, CyclicBarrier barrier) {
+        super(vertex, barrier);
+    }
+
+    public P2c(Vertex vertex) {
+        super(vertex);
+    }
 
     @Override
     public boolean applicableTo(Vertex vertex) {
@@ -56,7 +66,7 @@ public class P2c implements Production {
     }
 
     @Override
-    public void apply(Vertex vertex) {
+    public void apply() {
         Vertex leftTopGrayI = vertex.getChild(NE).getChild(NE);
         Vertex leftBottomGrayI = vertex.getChild(NE).getChild(SE);
         Vertex leftTopE = leftTopGrayI.getSibling(NE);
